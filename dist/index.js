@@ -16,6 +16,7 @@ app.use(express_1.default.json());
 dotenv_1.default.config({ path: "./.env" });
 app.use((0, morgan_1.default)("dev"));
 const allowedOrigins = [
+    "http://localhost:5173",
     "http://127.0.0.1:5173",
     "https://mini-postman-ten.vercel.app/",
 ];
