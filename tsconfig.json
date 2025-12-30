@@ -13,7 +13,9 @@
   "include": [
     "src/**/*",
     "api/**/*", // Include all files in the src and api directories
-    "index.ts"
+    "index.ts",
+    "controller",
+    "routes"
   ],
   "exclude": ["node_modules", "dist"]
 }
