@@ -18,7 +18,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.get("/api/health", async (req, res) => {
   console.log("hello ");
-  const count = await prisma.request.count();
+  const count = await prisma.user.count();
   res.status(200).json({ status: "OK", recordsInDB: count });
 });
 

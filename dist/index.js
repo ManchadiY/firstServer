@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 });
 app.get("/api/health", async (req, res) => {
     console.log("hello ");
-    const count = await prisma_1.default.request.count();
+    const count = await prisma_1.default.user.count();
     res.status(200).json({ status: "OK", recordsInDB: count });
 });
 app.use("/api/v1/auth", AuthRoutes_1.default);

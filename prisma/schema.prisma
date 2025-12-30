@@ -10,17 +10,28 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  Int?
-}
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+  id       String   @id @default(uuid()) // UUID primary key
+  email    String   @unique
+  name     String?
+  password String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  apiCalls ApiCall[] // One-to-many relation
+}
+
+model ApiCall {
+  id          String   @id @default(uuid()) // UUID primary key
+  name        String
+  description String?
+  method      String
+  url         String
+  headers     Json?    // Array of objects: [{ key, value, enabled }]
+  body        String?  // Raw body as string
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  userId      String   // Foreign key (UUID)
+  user        User     @relation(fields: [userId], references: [id])
 }
