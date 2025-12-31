@@ -17,6 +17,9 @@ app.use(express_1.default.json());
 dotenv_1.default.config({ path: "./.env" });
 app.use((0, morgan_1.default)("dev"));
 app.use((0, cors_1.default)());
+app.get("/", async (req, res) => {
+    res.status(200).json({ message: "welcome to node server for minipostman" });
+});
 app.get("/api/health", async (req, res) => {
     console.log("hello ");
     try {
