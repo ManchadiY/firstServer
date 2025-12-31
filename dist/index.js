@@ -30,8 +30,15 @@ app.get("/", (req, res) => {
 });
 app.get("/api/health", async (req, res) => {
     console.log("hello ");
-    const count = await prisma_1.default.user.count();
-    res.status(200).json({ status: "OK", recordsInDB: count });
+    try {
+        const count = await prisma_1.default.user.count();
+        console.log("count ");
+        res.status(200).json({ status: "OK", recordsInDB: count });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({ status: "failed", error });
+    }
 });
 app.use("/api/v1/auth", AuthRoutes_1.default);
 // handle undefined routes
