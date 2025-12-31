@@ -13,23 +13,7 @@ app.use(express.json());
 dotenv.config({ path: "./.env" });
 app.use(morgan("dev"));
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "http://127.0.0.1:5173",
-  "https://mini-postman-ten.vercel.app/",
-];
-
-app.use(
-  cors({
-    origin: allowedOrigins,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
-
-app.get("/", (req: Request, res: Response) => {
-  res.json({ message: "Hello from node server" });
-});
+app.use(cors());
 
 app.get("/api/health", async (req, res) => {
   console.log("hello ");
