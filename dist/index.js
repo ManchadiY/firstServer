@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const AuthRoutes_1 = __importDefault(require("./src/routes/AuthRoutes"));
+const ApiCallRoutes_1 = __importDefault(require("./src/routes/ApiCallRoutes"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const morgan_1 = __importDefault(require("morgan"));
 const prisma_1 = __importDefault(require("./src/prisma"));
@@ -29,6 +30,7 @@ app.get("/api/health", async (req, res) => {
     }
 });
 app.use("/api/v1/auth", AuthRoutes_1.default);
+app.use("/api/v1/Apicall", ApiCallRoutes_1.default);
 // handle undefined routes
 app.use((req, res) => {
     console.log("Undefined route accessed:", req.originalUrl);

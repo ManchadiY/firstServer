@@ -66,7 +66,7 @@ const login = async (req, res) => {
         return res.status(200).json({
             msg: "User signed in",
             user: { email: user.email, name: user.name },
-            token,
+            jwt: token,
         });
     }
     catch (e) {

@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import AuthRoutes from "./src/routes/AuthRoutes";
+import APiCallRoutes from "./src/routes/ApiCallRoutes";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import prisma from "./src/prisma";
@@ -29,6 +30,7 @@ app.get("/api/health", async (req, res) => {
 });
 
 app.use("/api/v1/auth", AuthRoutes);
+app.use("/api/v1/Apicall", APiCallRoutes);
 
 // handle undefined routes
 app.use((req: Request, res: Response) => {

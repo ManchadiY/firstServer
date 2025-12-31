@@ -40,6 +40,7 @@ export const authMiddleware = (
 
     // Attach user info to request
     req.user = decoded;
+    console.log("decoded", decoded);
 
     next();
   } catch (error) {

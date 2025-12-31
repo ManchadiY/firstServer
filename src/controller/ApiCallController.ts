@@ -3,7 +3,12 @@ import prisma from "../prisma";
 
 // Create a new API call
 export const createApiCall = async (req: Request, res: Response) => {
-  const { name, description, method, url, headers, body, userId } = req.body;
+  if (!req.user) {
+    return res.status(401).json({ msg: "Unauthorized" });
+  }
+
+  const { id: userId } = req.user;
+  const { name, description, method, url, headers, body } = req.body;
 
   if (!name || !method || !url || !userId) {
     return res
@@ -52,5 +57,31 @@ export const deleteApiCall = async (req: Request, res: Response) => {
   } catch (error) {
     console.error(error);
     return res.status(500).json({ msg: "Internal server error", error });
+  }
+};
+export const getAllApiCalls = async (req: Request, res: Response) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ msg: "Unauthorized" });
+    }
+
+    const userId = req.user.id;
+
+    const apiCalls = await prisma.apiCall.findMany({
+      where: {
+        userId,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return res.status(200).json({
+      count: apiCalls.length,
+      apiCalls,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ msg: "Internal server error" });
   }
 };
